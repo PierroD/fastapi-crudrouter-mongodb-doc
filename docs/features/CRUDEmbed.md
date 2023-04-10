@@ -5,7 +5,7 @@ I'm currently working on adding the Update and Replace methods to the CRUDEmbed,
 The Delete method is available but also kinda different from the rest in it returns.
 
 !!! question "How to use it ?"
-CRUDRouter will detect that a field is a list of MongoModel and use it to build an embed around it.
+    CRUDRouter will detect that a field is a list of MongoModel and use it to build an embed around it.
 
     ```py hl_lines="4"
     ...
