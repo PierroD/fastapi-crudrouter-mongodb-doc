@@ -26,6 +26,24 @@ The CRUDRouter will generate the following routes for you:
 !!! note "If you want to respect the RESTfull"
     Make sure to add an `s` to the end of prefix, so that the route will be `/my_prefixes` instead of `/my_prefix`.
 
+You have the possibility to add some custom dependencies to your routes, and you can also disable some router's routes, see all the parameters bellow :
+
+| Param Name               | Default Value | Type              | Description                 | Default Behavior                        |
+|--------------------------|---------------|-------------------|-----------------------------|-----------------------------------------|
+| disable_get_all          | False         | bool              | Disable get all route       | Get all route is enable / visible       |
+| disable_get_one          | False         | bool              | Disable get by id route     | Get by id route is enable / visible     |
+| disable_create_one       | False         | bool              | Disable create by id route  | Create by id route is enable / visible  |
+| disable_replace_one      | False         | bool              | Disable replace by id route | Replace by id route is enable / visible |
+| disable_update_one       | False         | bool              | Disable update by id route  | Update by id route is enable / visible  |
+| disable_delete_one       | False         | bool              | Disable delete by id route  | Delete by id route is enable / visible  |
+| dependencies_get_all     | None          | Sequence[Depends] | Add custom dependencies     | Default router dependencies             |
+| dependencies_get_one     | None          | Sequence[Depends] | Add custom dependencies     | Default router dependencies             |
+| dependencies_create_one  | None          | Sequence[Depends] | Add custom dependencies     | Default router dependencies             |
+| dependencies_replace_one | None          | Sequence[Depends] | Add custom dependencies     | Default router dependencies             |
+| dependencies_update_one  | None          | Sequence[Depends] | Add custom dependencies     | Default router dependencies             |
+| dependencies_delete_one  | None          | Sequence[Depends] | Add custom dependencies     | Default router dependencies             |
+
+
 The CRUDRouter will also generate the OpenAPI schema for you, and document the routes for you.
 
 ![CRUDRouter OpenAPI schema](../assets/img/crud-router.png)
