@@ -2,6 +2,16 @@ The MongoModel is one of the two main classes of this package. It is a Pydantic 
 
 The MongoModel is a Pydantic model, so you can use all the features of Pydantic models. You can also use the Pydantic Field class to define the fields of your model. The MongoModel adds a few extra fields to the Pydantic model.
 
+You are able to import the MongoModel from the fastapi_crudrouter_mongodb package. You can use all the methods of the Pydantic model, but also the methods of the MongoModel which are described below.
+
+| Method     | Description                                                                               | State      |
+|------------|-------------------------------------------------------------------------------------------|------------|
+| from_mongo | Transform a MongoDB object to a python dict (as a MongoModel)                             | OK         |
+| mongo      | Convert a MongoModel object to a dict                                                     | Deprecated |
+| to_mongo   | Same as mongo but with better naming                                                      | OK         |
+| convert_to | Gives you the oportunity to convert a MongoModel to any other Pydantic dict or MongoModel | Ok         |
+
+
 !!! note "The MongoModel adds the following fields to the Pydantic model"
     ```py
     id: Optional[MongoObjectId] = Field()
