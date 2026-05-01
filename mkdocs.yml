@@ -34,21 +34,41 @@ repo_name: pierrod/fastapi-crudrouter-mongodb
 repo_url: https://github.com/pierrod/fastapi-crudrouter-mongodb
 edit_uri: ""
 nav:
-  - Overview: index.md
-  - Migrate: migrate.md
-  - Models and Schemas: models-and-schemas.md
-  - Routing: routing.md
-  - Models:
-    - models/MongoModel.md
-    - models/MongoObjectId.md
-    - models/DeletedModelOut.md
-  - Routers:
-      - routers/CRUDRouter.md
-      - routers/CRUDLookup.md
-      - routers/CRUDEmbed.md
+  - Home: index.md
+  - QuickStart: 
+    - quickstart/index.md
+    - quickstart/01-installation-setup.md
+    - quickstart/02-models-and-schemas.md
+    - quickstart/03-crud-operations.md
+    - quickstart/04-filtering-sorting-pagination.md
+    - quickstart/05-related-data.md
+    - quickstart/06-advanced-patterns.md
+    - quickstart/07-production-ready.md
+  - Reference:
+    - Routing: reference/routing.md
+    - Models: 
+      - reference/models/MongoModel.md
+      - reference/models/MongoObjectId.md
+      - reference/models/DeletedModelOut.md
+      - reference/models/ models-and-schemas.md
+    - APIs and Router:
+      - reference/apis/CRUDRouter.md
+      - reference/apis/CRUDLookup.md
+      - reference/apis/CRUDEmbed.md
+      - reference/apis/CRUDPopulate.md
+    - Services:
+      - reference/services/CRUDService.md
+    - Repositories:
+      - reference/repositories/CRUDRepository.md
+
   - Examples:
       - examples/minimalist.md
-  - Releases: releases.md
+      - examples/basic-crud.md
+      - examples/relationships.md
+      - examples/service-and-repository.md
+      
+  - Migrate Pydantic from v1 to v2: migrate.md
+  - Releases notes: releases.md
 
 markdown_extensions:
   - toc:
@@ -63,8 +83,8 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed
   - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 extra:
   social:

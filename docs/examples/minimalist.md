@@ -1,15 +1,19 @@
 
-This is a minimalist example of a FastAPI application build with FastAPI CRUDRouter for Mongodb :seedling:.
+This example shows a small but complete FastAPI application built with fastapi-crudrouter-mongodb.
 
-I'm working on differents examples, with some custom router besides the CRUDRouter, and I will add them to the documentation soon :rocket:.
+It keeps the setup intentionally small while still showing two common patterns:
+
+- embedded documents with `CRUDEmbed`
+- nested child routes with `CRUDLookup`
 
 ```py linenums="1"
 from datetime import datetime
-from typing import Optional, Union, Annotated
+from typing import Optional, Union
+
 from fastapi import FastAPI
+from pydantic import Field
 from fastapi_crudrouter_mongodb import (
-    ObjectId,
-    MongoObjectId,
+    ObjectIdType,
     MongoModel,
     CRUDRouter,
     CRUDLookup,
@@ -27,15 +31,15 @@ db = client.local
 
 # Database Model
 class MessageModel(MongoModel):
-    id: Annotated[ObjectId, MongoObjectId] | None = None
+    id: ObjectIdType | None = None
     message: str
-    user_id: Annotated[ObjectId, MongoObjectId]
+    user_id: ObjectIdType
     created_at: str | None = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     updated_at: str | None = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 
 class AddressModel(MongoModel):
-    id: Annotated[ObjectId, MongoObjectId] | None = None
+    id: ObjectIdType | None = None
     street: str
     city: str
     state: str
@@ -43,32 +47,27 @@ class AddressModel(MongoModel):
 
 
 class UserModel(MongoModel):
-    id: Annotated[ObjectId, MongoObjectId] | None = None
+    id: ObjectIdType | None = None
     name: str
     email: str
     password: str
-    addresses: Optional[list[AddressModel]] = []
+    addresses: Optional[list[AddressModel]] = Field(default_factory=list)
     messages: Optional[Union[list[MessageModel], MessageModel]] = None
+
 
 # Model Out -> Schema
 class UserModelOut(MongoModel):
     id: str
     name: str
     email: str
-    addresses: list[AddressModel] = []
+    addresses: list[AddressModel] = Field(default_factory=list)
 
 
-class LookupModelOut(UserModelOut):
-    messages: list[MessageModel] | MessageModel
-
-
-# Instantiating the CRUDRouter, and a lookup for the messages
-# a User is a model that contains a list of embedded addresses and related to multiple messages
+# A user embeds addresses and is linked to many messages.
 addresses_embed = CRUDEmbed(model=AddressModel, embed_name="addresses")
 
 messages_lookup = CRUDLookup(
     model=MessageModel,
-    model_out=LookupModelOut,
     collection_name="messages",
     prefix="messages",
     local_field="_id",
@@ -91,7 +90,15 @@ app = FastAPI()
 app.include_router(users_router)
 ```
 
-It will give you the following OpenAPI schema:
+This generates standard user CRUD routes plus nested message routes such as:
+
+- `GET /users`
+- `POST /users`
+- `GET /users/{id}`
+- `GET /users/{id}/messages`
+- `POST /users/{id}/messages`
+
+It will produce an OpenAPI schema similar to this:
 
 ![CRUDRouter OpenAPI schema](../assets/img/crud-router-full.png)
 

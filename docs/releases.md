@@ -1,44 +1,150 @@
-# v0.1.0 - Migrate to Pydantic v2 & Refacto 
-
-**2024-03-31**
-
-### ⚠️ Breaking changes 
-- A lot of the typing has changed due to Pydantic v2
-- The Embed needs to be written explicitly
 
 
-### Feat
-- Migrate to Pydantic v2
-- Add output schema to the CRUDLookup
-- New CRUDEmbed router 
+# Releases
 
-### Fix 
-- DELETE Routes will returned the same Schema
-- Remove lookups fields from the parent Schema automatically
+This page tracks notable changes across released versions of `fastapi-crudrouter-mongodb`.
 
-### Doc
-- New documentation pages
-- Migration guides available here [Migration Guide]()
+The format is intentionally changelog-style so you can quickly scan for breaking changes, new features, fixes, and migration impact.
 
---- 
+## v1.0.0
 
-# v0.0.8 - Add output schema to the CRUDRouter 
-**2023-09-13**
+**Date:** 2025-05-02
 
-### Feat 
-- Add `model_out` to the CRUDRouter, gives you the opportunity not to reveal sensitive data
-- Add black to format the code
-- Add ruff to lint the code
+### Highlights
 
-### Fix 
+- Added `CRUDPopulate` for automatic population of referenced documents
+- Continued internal refactoring
+- Expanded test coverage
 
-- fix the `convert_to` method so it will convert the `id` to str to prevent issue while converting MongoObjectId to str
+### Added
 
-#### Example
+`CRUDPopulate` lets you resolve referenced ObjectIds into full documents from another collection. This is especially useful when your MongoDB models store relationships as ids but your API responses need the related data expanded.
 
----
+## v0.1.4
 
-```py
+**Date:** Silent release
+
+### Added
+
+- Added `CRUDRepository`
+- Added support for custom identifier fields instead of only `_id`
+
+### Changed
+
+- Refactored the internals to use a repository pattern
+
+## v0.1.3
+
+**Date:** 2024-12-17
+
+### Highlights
+
+- Reuse the service attached to an existing `CRUDRouter`
+- Create your own service layer for custom endpoints
+
+### Example
+
+```python
+from fastapi_crudrouter_mongodb import CRUDRouterService
+
+
+@app.get("/get_one/{id}")
+async def get_one(id: str):
+    # Assuming you already have a users_router CRUDRouter instance
+    return await users_router.service.get_one(id)
+
+
+class TestModel(MongoModel):
+    id: Annotated[ObjectId, MongoObjectId] | None = None
+    name: str
+
+
+service = CRUDRouterService(TestModel, db, "test")
+
+
+@app.get("/test")
+async def test():
+    return await service.get_all()
+```
+
+## v0.1.2
+
+**Date:** 2024-08-21
+
+### Breaking Change
+
+- `MongoModel` now uses camelCase as the default input and output style
+
+You do not need to manually transform field names. The library converts snake_case fields to camelCase for FastAPI input and output.
+
+### Output Example
+
+Previous output:
+
+```json
+{
+  "user_id": "..."
+}
+```
+
+New output:
+
+```json
+{
+  "userId": "..."
+}
+```
+
+## v0.1.1
+
+**Date:** 2024-04-13
+
+### Fixed
+
+- `convert_to` can now replace every `ObjectId` inside dicts and lists
+
+## v0.1.0
+
+**Date:** 2024-03-31
+
+### Breaking Changes
+
+- Typing changed significantly due to the Pydantic v2 migration
+- Embeds must now be declared explicitly
+
+### Added
+
+- Migrated the library to Pydantic v2
+- Added output schema support to `CRUDLookup`
+- Added the new `CRUDEmbed` router
+
+### Fixed
+
+- DELETE routes now return the expected schema
+- Lookup fields are removed automatically from the parent schema when needed
+
+### Documentation
+
+- Added new documentation pages
+- Added migration guides: [Migration Guide](migrate.md)
+
+## v0.0.8
+
+**Date:** 2023-09-13
+
+### Added
+
+- Added `model_out` to `CRUDRouter` so you can hide sensitive fields in responses
+- Added `black` for formatting
+- Added `ruff` for linting
+
+### Fixed
+
+- Fixed `convert_to` so it converts `id` to `str` when needed for `MongoObjectId` values
+
+### Example
+
+```python
 class UserModel(MongoModel):
     id: Optional[MongoObjectId] = Field()
     name: str
@@ -53,6 +159,7 @@ class UserModelOut(MongoModel):
     name: str
     email: str
 
+
 users_controller = CRUDRouter(
     model=UserModel,
     model_out=UserModelOut,
@@ -64,51 +171,44 @@ users_controller = CRUDRouter(
 )
 ```
 
-#### Result
+### Result
 
----
+![CRUDRouter output schema example](https://github.com/PierroD/fastapi-crudrouter-mongodb/assets/40763427/b30f73dc-b545-4e67-93cc-33338902b170)
 
-![image](https://github.com/PierroD/fastapi-crudrouter-mongodb/assets/40763427/b30f73dc-b545-4e67-93cc-33338902b170)
+## v0.0.7
 
---- 
+**Date:** 2023-08-13
 
-# v0.0.7 - Fix Pydantic to v1.x 
-**2023-08-13**
+### Changed
 
-### Fix Pydantic crashes and add methods
+- Forced Pydantic v1.x dependency to prevent crashes at the time
+- Refactored `mongo` and renamed it to `to_mongo`
 
-- Fix : force pydantic v 1.X dependency to prevent the lib from crashes
-- Refactor : refacto `mongo` and rename it to `to_mongo`
-- Feat : add a new method called `convert_to` (it helps you to convert a model to another)
+### Added
 
-#### Example
- 
----
+- Added the `convert_to` helper for converting one model into another
 
-> Using the convert_to option 
-```py
+### Example
+
+```python
 @app.get("/{id}", response_model=UserModelDAO)
 async def root(id: str):
-    response = await db['users'].find_one({'_id': MongoObjectId(id)})
-    userDAO = UserModelDAO.from_mongo(response)
-    userDTO = userDAO.convert_to(UserModelDTO)
-    return userDTO
+    response = await db["users"].find_one({"_id": MongoObjectId(id)})
+    user_dao = UserModelDAO.from_mongo(response)
+    user_dto = user_dao.convert_to(UserModelDTO)
+    return user_dto
 ```
 
---- 
+## v0.0.5
 
-# v0.0.5 - Remove routes and add dependencies
-**2023-05-10**
+**Date:** 2023-05-10
 
+### Added
 
-### Remove route and add dependencies to a specific route :rocket: 
+- Added support for disabling individual `CRUDRouter` routes
+- Added support for route-specific dependencies
 
-- Feat : allowed to disable any route of the CRUDRouter
-- Feat : allowed to add custom dependencies to a specific route 
-
-#### Example 
-
----
+### Example
 
 ```python
 user = CRUDRouter(
@@ -122,76 +222,68 @@ user = CRUDRouter(
 )
 ```
 
-#### New CRUDRouter params
+### New `CRUDRouter` Parameters
 
----
+| Parameter                  | Default | Type              | Description                  |
+|---------------------------|---------|-------------------|------------------------------|
+| `disable_get_all`         | `False` | `bool`            | Disable the get-all route    |
+| `disable_get_one`         | `False` | `bool`            | Disable the get-one route    |
+| `disable_create_one`      | `False` | `bool`            | Disable the create route     |
+| `disable_replace_one`     | `False` | `bool`            | Disable the replace route    |
+| `disable_update_one`      | `False` | `bool`            | Disable the update route     |
+| `disable_delete_one`      | `False` | `bool`            | Disable the delete route     |
+| `dependencies_get_all`    | `None`  | `Sequence[Depends]` | Add custom dependencies    |
+| `dependencies_get_one`    | `None`  | `Sequence[Depends]` | Add custom dependencies    |
+| `dependencies_create_one` | `None`  | `Sequence[Depends]` | Add custom dependencies    |
+| `dependencies_replace_one`| `None`  | `Sequence[Depends]` | Add custom dependencies    |
+| `dependencies_update_one` | `None`  | `Sequence[Depends]` | Add custom dependencies    |
+| `dependencies_delete_one` | `None`  | `Sequence[Depends]` | Add custom dependencies    |
 
-| Param Name               | Default Value | Type              | Description                 | Default Behavior                        |
-|--------------------------|---------------|-------------------|-----------------------------|-----------------------------------------|
-| disable_get_all          | False         | bool              | Disable get all route       | Get all route is enable / visible       |
-| disable_get_one          | False         | bool              | Disable get by id route     | Get by id route is enable / visible     |
-| disable_create_one       | False         | bool              | Disable create by id route  | Create by id route is enable / visible  |
-| disable_replace_one      | False         | bool              | Disable replace by id route | Replace by id route is enable / visible |
-| disable_update_one       | False         | bool              | Disable update by id route  | Update by id route is enable / visible  |
-| disable_delete_one       | False         | bool              | Disable delete by id route  | Delete by id route is enable / visible  |
-| dependencies_get_all     | None          | Sequence[Depends] | Add custom dependencies     | Default router dependencies             |
-| dependencies_get_one     | None          | Sequence[Depends] | Add custom dependencies     | Default router dependencies             |
-| dependencies_create_one  | None          | Sequence[Depends] | Add custom dependencies     | Default router dependencies             |
-| dependencies_replace_one | None          | Sequence[Depends] | Add custom dependencies     | Default router dependencies             |
-| dependencies_update_one  | None          | Sequence[Depends] | Add custom dependencies     | Default router dependencies             |
-| dependencies_delete_one  | None          | Sequence[Depends] | Add custom dependencies     | Default router dependencies             |
+## v0.0.4
 
---- 
+**Date:** 2023-04-10
 
-# v0.0.4 - Initial Release
-**2023-04-10**
+### Initial Release
 
-![](https://pierrod.github.io/fastapi-crudrouter-mongodb-doc/assets/img/logo-long-color.png)
+The first public release introduced automatic CRUD route generation for MongoDB-backed FastAPI projects.
 
-<h1 align="center">
- :partying_face:  Initial Release :partying_face:  
-</h1>
+### Project Links
 
-Tired of rewriting the same generic CRUD routes? Need to rapidly prototype a feature for a presentation or a hackathon? Thankfully, fastapi-crudrouter-mongodb has your back. As an extension to the APIRouter included with FastAPI, the FastAPI CRUDRouter will automatically generate and document your CRUD routes for you.
+- Documentation: [fastapi-crudrouter-mongodb-doc](https://pierrod.github.io/fastapi-crudrouter-mongodb-doc/)
+- Source code: [pierrod/fastapi-crudrouter-mongodb](https://github.com/pierrod/fastapi-crudrouter-mongodb)
 
+### Credits
 
-**Documentation**: [https://pierrod.github.io/fastapi-crudrouter-mongodb-doc/](https://pierrod.github.io/fastapi-crudrouter-mongodb-doc/)
+- Base project and original idea: [awtkns/fastapi-crudrouter](https://github.com/awtkns/fastapi-crudrouter)
+- `_id` to `id` conversion reference: [FastAPI issue discussion](https://github.com/tiangolo/fastapi/issues/1515)
 
-**Source Code**: [https://github.com/pierrod/fastapi-crudrouter-mongodb](https://github.com/pierrod/fastapi-crudrouter-mongodb)
-
-**Credits** :
-
-- Base projet and idea : [awtkns](https://github.com/awtkns/fastapi-crudrouter)
-
-- Convert \_id to id : [mclate github guide](https://github.com/tiangolo/fastapi/issues/1515)
-
-
-## Installation
+### Installation
 
 ```bash
 pip install fastapi-crudrouter-mongodb
 ```
 
-## Basic Usage
-
-I will provide more examples in the future, but for now, here is a basic example of how to use the FastAPI CRUDRouter for Mongodb.
+### Basic Example
 
 ```python
 from datetime import datetime
 from typing import List, Optional, Union
+
 from fastapi import FastAPI
 from pydantic import Field
-from fastapi_crudrouter_mongodb import CRUDRouter, MongoModel, MongoObjectId, CRUDLookup
 import motor.motor_asyncio
+from fastapi_crudrouter_mongodb import (
+    CRUDLookup,
+    CRUDRouter,
+    MongoModel,
+    MongoObjectId,
+)
 
 
-# Database connection using motor
-client = motor.motor_asyncio.AsyncIOMotorClient(
-    "mongodb://localhost:27017/local")
-
+client = motor.motor_asyncio.AsyncIOMotorClient("mongodb://localhost:27017/local")
 db = client.local
 
-# Models
+
 class MessageModel(MongoModel):
     id: Optional[MongoObjectId] = Field()
     message: str
@@ -199,12 +291,14 @@ class MessageModel(MongoModel):
     created_at: Optional[str] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     updated_at: Optional[str] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+
 class AddressModel(MongoModel):
     id: Optional[MongoObjectId] = Field()
     street: str
     city: str
     state: str
     zip: str
+
 
 class UserModel(MongoModel):
     id: Optional[MongoObjectId] = Field()
@@ -214,15 +308,13 @@ class UserModel(MongoModel):
     messages: Optional[Union[List[MessageModel], MessageModel]] = None
 
 
-# Instantiating the CRUDRouter, and a lookup for the messages
-# a User is a model that contains a list of embedded addresses and related to multiple messages
 messages_lookup = CRUDLookup(
-        model=MessageModel,
-        collection_name="messages",
-        prefix="messages",
-        local_field="_id",
-        foreign_field="user_id"
-    )
+    model=MessageModel,
+    collection_name="messages",
+    prefix="messages",
+    local_field="_id",
+    foreign_field="user_id",
+)
 
 users_controller = CRUDRouter(
     model=UserModel,
@@ -233,15 +325,12 @@ users_controller = CRUDRouter(
     tags=["users"],
 )
 
-# Instantiating the FastAPI app
 app = FastAPI()
 app.include_router(users_controller)
 ```
 
-## OpenAPI Support
+### OpenAPI Support
 
-By default, all routes generated by the CRUDRouter will be documented according to OpenAPI spec.
-
-Below are the default routes created by the CRUDRouter shown in the generated OpenAPI documentation.
+All generated routes are automatically documented in the OpenAPI schema.
 
 ![CRUDRouter full OpenAPI image](https://pierrod.github.io/fastapi-crudrouter-mongodb-doc/assets/img/crud-router-full.png)

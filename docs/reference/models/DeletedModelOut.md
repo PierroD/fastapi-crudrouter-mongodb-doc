@@ -1,3 +1,5 @@
+## ⚠️ [DEPRECATED] DeletedModelOut
+
 This model has been created to return the id of the deleted document in the database
 
 ```py
