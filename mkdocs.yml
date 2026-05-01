@@ -1,0 +1,85 @@
+site_name: FastAPI CRUD Router Mongodb
+site_url: https://pierrod.github.io/fastapi-crudrouter-mongodb-doc/
+site_author: Pierre Duveau
+site_description:
+theme:
+  name: material
+  custom_dir: overrides
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: green
+      accent: amber
+      toggle:
+        icon: material/lightbulb
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: green
+      accent: amber
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to dark mode
+  features:
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.copy
+  icon:
+    repo: fontawesome/brands/github-alt
+  logo: assets/img/logo-white.png
+  favicon: assets/img/logo-color.png
+  language: en
+repo_name: pierrod/fastapi-crudrouter-mongodb
+repo_url: https://github.com/pierrod/fastapi-crudrouter-mongodb
+edit_uri: ""
+nav:
+  - Overview: index.md
+  - Migrate: migrate.md
+  - Models and Schemas: models-and-schemas.md
+  - Routing: routing.md
+  - Models:
+    - models/MongoModel.md
+    - models/MongoObjectId.md
+    - models/DeletedModelOut.md
+  - Routers:
+      - routers/CRUDRouter.md
+      - routers/CRUDPopulate.md
+      - routers/CRUDLookup.md
+      - routers/CRUDEmbed.md
+  - Examples:
+      - examples/minimalist.md
+  - Releases: releases.md
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - extra
+  - admonition
+  - codehilite
+  - attr_list
+  - md_in_html
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/pierrod/fastapi-crudrouter-mongodb
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/pierre-duveau-193586182
+    - icon: fontawesome/solid/globe
+      link: https://github.com/pierrod
+  version:
+    provider: mike
+extra_css:
+  - css/termynal.css
+  - css/custom.css
+extra_javascript:
+  - js/termynal.js
+  - js/custom.js
