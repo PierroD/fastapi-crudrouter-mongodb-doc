@@ -1,0 +1,2703 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Pierre Duveau">
+      
+      
+        <link rel="canonical" href="https://pierrod.github.io/fastapi-crudrouter-mongodb-doc/1.0.0/reference/apis/CRUDRouter/">
+      
+      
+        <link rel="prev" href="../../models/models-and-schemas/">
+      
+      
+        <link rel="next" href="../CRUDLookup/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/img/logo-color.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>CRUDRouter - FastAPI CRUD Router Mongodb</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/termynal.css">
+    
+      <link rel="stylesheet" href="../../../css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#crudrouter" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+          <aside class="md-banner md-banner--warning">
+            <div class="md-banner__inner md-grid md-typeset">
+              
+  You're not viewing the latest version.
+  <a href="../../../..">
+    <strong>Click here to go to latest.</strong>
+  </a>
+
+            </div>
+            <script>var el=document.querySelector("[data-md-component=outdated]"),base=new URL("../../.."),outdated=__md_get("__outdated",sessionStorage,base);!0===outdated&&el&&(el.hidden=!1)</script>
+          </aside>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="FastAPI CRUD Router Mongodb" class="md-header__button md-logo" aria-label="FastAPI CRUD Router Mongodb" data-md-component="logo">
+      
+  <img src="../../../assets/img/logo-white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FastAPI CRUD Router Mongodb
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CRUDRouter
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/pierrod/fastapi-crudrouter-mongodb" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M202.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M496 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pierrod/fastapi-crudrouter-mongodb
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="FastAPI CRUD Router Mongodb" class="md-nav__button md-logo" aria-label="FastAPI CRUD Router Mongodb" data-md-component="logo">
+      
+  <img src="../../../assets/img/logo-white.png" alt="logo">
+
+    </a>
+    FastAPI CRUD Router Mongodb
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/pierrod/fastapi-crudrouter-mongodb" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M202.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M496 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pierrod/fastapi-crudrouter-mongodb
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QuickStart
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    QuickStart
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ⚡ Quickstart Guides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../quickstart/01-installation-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Installation &amp; Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../quickstart/02-models-and-schemas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Models &amp; Output Schemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../quickstart/03-crud-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. CRUD Operations &amp; Error Handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../quickstart/04-filtering-sorting-pagination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Filtering, Sorting &amp; Pagination
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../quickstart/05-related-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Working with Related Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../quickstart/06-advanced-patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Advanced Patterns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../quickstart/07-production-ready/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Production Ready
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Routing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Models
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Models
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/MongoModel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoModel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/MongoObjectId/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoObjectId
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/DeletedModelOut/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DeletedModelOut
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/models-and-schemas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Models and Schemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs and Router
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    APIs and Router
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CRUDRouter
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CRUDRouter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Start
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constructor-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor Parameters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#output-schemas-hide-sensitive-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output Schemas (Hide Sensitive Data)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Output Schemas (Hide Sensitive Data)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-hiding-passwords" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Hiding Passwords
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#automatic-route-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatic Route Generation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Automatic Route Generation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fastapi-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FastAPI Compatibility
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-query-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Query Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Query Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pagination-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pagination Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sorting-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sorting Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtering-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filtering Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complete-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complete Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filter-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filter Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-side-filters-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server-Side Filters (Advanced)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customizing-routes-disable-add-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Customizing Routes: Disable &amp; Add Dependencies
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Customizing Routes: Disable &amp; Add Dependencies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#disabling-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Disabling Routes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-route-specific-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding Route-Specific Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-read-only-collection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Read-Only Collection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-protect-delete-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Protect Delete Operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-protect-read-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Protect Read Operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-identifier-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Identifier Fields
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Custom Identifier Fields">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#default-behavior-using-_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Default Behavior (Using _id)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-identifier-using-email" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Identifier (Using Email)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#auto-populate-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auto-Populate References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Auto-Populate References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#whats-populating" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's Populating?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setup-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#automatic-api-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatic API Documentation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps-advanced-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps: Advanced Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Next Steps: Advanced Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crudlookup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CRUDLookup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crudembed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CRUDEmbed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crudpopulate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CRUDPopulate
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CRUDLookup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CRUDLookup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CRUDEmbed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CRUDEmbed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CRUDPopulate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CRUDPopulate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Services
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../services/CRUDService/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CRUDService
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repositories
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Repositories
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../repositories/CRUDRepository/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CRUDRepository
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Examples
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/minimalist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minimalist
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/basic-crud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic CRUD Example
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/relationships/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Relationships Example
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/service-and-repository/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Service and Repository Example
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../migrate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migrate Pydantic from v1 to v2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases notes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Start
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constructor-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor Parameters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#output-schemas-hide-sensitive-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output Schemas (Hide Sensitive Data)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Output Schemas (Hide Sensitive Data)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-hiding-passwords" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Hiding Passwords
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#automatic-route-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatic Route Generation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Automatic Route Generation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fastapi-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FastAPI Compatibility
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-query-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Query Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Query Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pagination-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pagination Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sorting-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sorting Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtering-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filtering Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complete-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complete Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filter-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filter Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-side-filters-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server-Side Filters (Advanced)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customizing-routes-disable-add-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Customizing Routes: Disable &amp; Add Dependencies
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Customizing Routes: Disable &amp; Add Dependencies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#disabling-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Disabling Routes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-route-specific-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding Route-Specific Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-read-only-collection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Read-Only Collection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-protect-delete-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Protect Delete Operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-protect-read-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Protect Read Operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-identifier-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Identifier Fields
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Custom Identifier Fields">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#default-behavior-using-_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Default Behavior (Using _id)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-identifier-using-email" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Identifier (Using Email)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#auto-populate-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auto-Populate References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Auto-Populate References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#whats-populating" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's Populating?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setup-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#automatic-api-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatic API Documentation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps-advanced-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps: Advanced Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Next Steps: Advanced Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crudlookup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CRUDLookup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crudembed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CRUDEmbed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crudpopulate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CRUDPopulate
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="crudrouter">CRUDRouter<a class="headerlink" href="#crudrouter" title="Permanent link">&para;</a></h1>
+<p>The <strong>CRUDRouter</strong> is a powerful utility that automatically generates all the standard REST API routes (Create, Read, Update, Delete) for your MongoDB models. Simply pass your model and database instance, and it will create fully-documented, production-ready endpoints for you.</p>
+<h2 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
+<p>To create a basic router, initialize it with your model and database:</p>
+<div class="highlight"><pre><span></span><code><span class="n">CRUDRouter</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">MyMongoModel</span><span class="p">,</span>
+    <span class="n">db</span><span class="o">=</span><span class="n">MyDbInstance</span><span class="p">,</span>
+    <span class="n">collection_name</span><span class="o">=</span><span class="s2">&quot;my_collection_name&quot;</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/my_prefix&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>The router will automatically generate six REST endpoints to manage your data. No boilerplate code required!</p>
+<h2 id="constructor-parameters">Constructor Parameters<a class="headerlink" href="#constructor-parameters" title="Permanent link">&para;</a></h2>
+<p>The current <code>CRUDRouter</code> implementation accepts these primary parameters:</p>
+<ul>
+<li><code>model</code>: MongoDB model used for request validation</li>
+<li><code>db</code>: Motor database instance</li>
+<li><code>collection_name</code>: MongoDB collection name</li>
+<li><code>identifier_field</code>: field used in item routes, default <code>_id</code></li>
+<li><code>model_out</code>: optional response schema</li>
+<li><code>lookups</code>: optional list of <code>CRUDLookup</code> declarations</li>
+<li><code>embeds</code>: optional list of <code>CRUDEmbed</code> declarations</li>
+<li><code>populates</code>: optional list of <code>CRUDPopulate</code> declarations</li>
+<li><code>disable_get_all</code>, <code>disable_get_one</code>, <code>disable_create_one</code>, <code>disable_replace_one</code>, <code>disable_update_one</code>, <code>disable_delete_one</code>: disable individual generated routes</li>
+<li><code>dependencies_get_all</code>, <code>dependencies_get_one</code>, <code>dependencies_create_one</code>, <code>dependencies_replace_one</code>, <code>dependencies_update_one</code>, <code>dependencies_delete_one</code>: attach FastAPI dependencies to specific generated routes</li>
+<li><code>filter_dependency</code>: dependency that returns a server-side filter for the <code>GET /resource</code> route</li>
+</ul>
+<p>Additional <code>*args</code> and <code>**kwargs</code> are passed through to the underlying router factory.</p>
+<h2 id="output-schemas-hide-sensitive-data">Output Schemas (Hide Sensitive Data)<a class="headerlink" href="#output-schemas-hide-sensitive-data" title="Permanent link">&para;</a></h2>
+<p>When you create an API, you might store sensitive information in your database (like passwords) that you don't want to expose in API responses. The CRUDRouter lets you define separate <strong>input</strong> and <strong>output</strong> models:</p>
+<ul>
+<li><strong>Input Model</strong>: Represents the data stored in your database (including sensitive fields)</li>
+<li><strong>Output Schema</strong>: Represents the data sent back to clients (sensitive fields excluded)</li>
+</ul>
+<h3 id="example-hiding-passwords">Example: Hiding Passwords<a class="headerlink" href="#example-hiding-passwords" title="Permanent link">&para;</a></h3>
+<p>Here's how to exclude a password field from API responses:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Annotated</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi_crudrouter_mongodb</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ObjectId</span><span class="p">,</span>
+    <span class="n">MongoObjectId</span><span class="p">,</span>
+    <span class="n">MongoModel</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Database Model - includes all fields</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">UserModel</span><span class="p">(</span><span class="n">MongoModel</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">ObjectId</span><span class="p">,</span> <span class="n">MongoObjectId</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">email</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">password</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># Sensitive - will NOT be exposed</span>
+
+<span class="c1"># Response Model - only public fields</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">UserModelOut</span><span class="p">(</span><span class="n">MongoModel</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">email</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="c1"># Password is intentionally omitted here!</span>
+
+<span class="c1"># When clients call your API, they only receive name, email, and id</span>
+</code></pre></div>
+<p>Now when your API returns user data, the <code>password</code> field is automatically excluded from all responses.</p>
+<h2 id="automatic-route-generation">Automatic Route Generation<a class="headerlink" href="#automatic-route-generation" title="Permanent link">&para;</a></h2>
+<p>The CRUDRouter automatically creates six standard REST API endpoints for your model:</p>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>HTTP Method</th>
+<th>What It Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/my_prefix</code></td>
+<td><code>GET</code></td>
+<td>Fetch all documents</td>
+</tr>
+<tr>
+<td><code>/my_prefix</code></td>
+<td><code>POST</code></td>
+<td>Create a new document</td>
+</tr>
+<tr>
+<td><code>/my_prefix/{id}</code></td>
+<td><code>GET</code></td>
+<td>Fetch a specific document by ID</td>
+</tr>
+<tr>
+<td><code>/my_prefix/{id}</code></td>
+<td><code>PUT</code></td>
+<td>Replace an entire document</td>
+</tr>
+<tr>
+<td><code>/my_prefix/{id}</code></td>
+<td><code>PATCH</code></td>
+<td>Update specific fields only</td>
+</tr>
+<tr>
+<td><code>/my_prefix/{id}</code></td>
+<td><code>DELETE</code></td>
+<td>Remove a document</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">REST API Naming Convention</p>
+<p>For proper REST conventions, use a plural name for your prefix. For example, use <code>prefix="/users"</code> instead of <code>prefix="/user"</code> so your routes become <code>/users</code>, <code>/users/{id}</code>, etc.</p>
+</div>
+<h3 id="fastapi-compatibility">FastAPI Compatibility<a class="headerlink" href="#fastapi-compatibility" title="Permanent link">&para;</a></h3>
+<p><code>CRUDRouter</code> forwards extra router options such as <code>prefix</code> and <code>tags</code>, so you can still organize your API like a normal FastAPI router:</p>
+<div class="highlight"><pre><span></span><code><span class="n">router</span> <span class="o">=</span> <span class="n">CRUDRouter</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">UserModel</span><span class="p">,</span>
+    <span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">,</span>
+    <span class="n">collection_name</span><span class="o">=</span><span class="s2">&quot;users&quot;</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/users&quot;</span><span class="p">,</span>
+    <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Users&quot;</span><span class="p">],</span>  <span class="c1"># Groups endpoints in API docs</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>For authentication or authorization, the current implementation exposes route-specific dependency parameters such as <code>dependencies_get_all</code> and <code>dependencies_delete_one</code> instead of one shared <code>dependencies</code> parameter.</p>
+<h2 id="advanced-query-features">Advanced Query Features<a class="headerlink" href="#advanced-query-features" title="Permanent link">&para;</a></h2>
+<p>The <code>GET /my_prefix</code> endpoint supports powerful query parameters for retrieving and organizing data:</p>
+<h3 id="pagination-parameters">Pagination Parameters<a class="headerlink" href="#pagination-parameters" title="Permanent link">&para;</a></h3>
+<p>Control how many results you get:</p>
+<ul>
+<li><code>skip</code> - Number of documents to skip</li>
+<li><code>limit</code> - Maximum number of documents to return</li>
+</ul>
+<h3 id="sorting-parameters">Sorting Parameters<a class="headerlink" href="#sorting-parameters" title="Permanent link">&para;</a></h3>
+<p>Order your results:</p>
+<ul>
+<li><code>sort_by</code> - The field name to sort by</li>
+<li><code>order_by</code> - Sort direction: <code>ASC</code> or <code>DESC</code></li>
+</ul>
+<h3 id="filtering-parameters">Filtering Parameters<a class="headerlink" href="#filtering-parameters" title="Permanent link">&para;</a></h3>
+<p>Filter documents based on conditions:</p>
+<ul>
+<li><code>filters</code> - A JSON object defining MongoDB filter criteria</li>
+</ul>
+<h3 id="complete-example">Complete Example<a class="headerlink" href="#complete-example" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="err">GET /users?skip=0&amp;limit=20&amp;sort_by=name&amp;order_by=DESC&amp;filters={&quot;status&quot;:&quot;active&quot;}</span>
+</code></pre></div>
+<p>This request fetches 20 active users, sorted by name in reverse alphabetical order, skipping the first 0 results.</p>
+<p>If <code>order_by</code> is provided with any other value, the router raises a <code>422</code> error with:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;order_by must be either ASC or DESC&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="filter-validation">Filter Validation<a class="headerlink" href="#filter-validation" title="Permanent link">&para;</a></h3>
+<p>If the JSON in your <code>filters</code> parameter is invalid, the API will return a <code>422</code> error:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Invalid JSON in filters parameter&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="server-side-filters-advanced">Server-Side Filters (Advanced)<a class="headerlink" href="#server-side-filters-advanced" title="Permanent link">&para;</a></h3>
+<p>For filters that should always be applied (like restricting data to the current user), use <code>filter_dependency</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">current_user_filter</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">User</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_user</span><span class="p">)):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Only show documents belonging to the current user&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">}</span>
+
+<span class="n">router</span> <span class="o">=</span> <span class="n">CRUDRouter</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">DocumentModel</span><span class="p">,</span>
+    <span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">,</span>
+    <span class="n">collection_name</span><span class="o">=</span><span class="s2">&quot;documents&quot;</span><span class="p">,</span>
+    <span class="n">filter_dependency</span><span class="o">=</span><span class="n">current_user_filter</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Query vs Server Filters</p>
+<p>When <code>filter_dependency</code> is set, client-provided <code>filters</code> query parameters are ignored in favor of the server-side filter. This ensures data security.</p>
+</div>
+<h2 id="customizing-routes-disable-add-dependencies">Customizing Routes: Disable &amp; Add Dependencies<a class="headerlink" href="#customizing-routes-disable-add-dependencies" title="Permanent link">&para;</a></h2>
+<p>Sometimes you don't need all six CRUD operations, or you want to add authentication/authorization to specific routes. The CRUDRouter lets you customize which routes are available and what dependencies they require.</p>
+<h3 id="disabling-routes">Disabling Routes<a class="headerlink" href="#disabling-routes" title="Permanent link">&para;</a></h3>
+<p>Set any of these to <code>True</code> to disable the corresponding endpoint:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Disables</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>disable_get_all</code></td>
+<td>GET all documents</td>
+</tr>
+<tr>
+<td><code>disable_get_one</code></td>
+<td>GET a single document</td>
+</tr>
+<tr>
+<td><code>disable_create_one</code></td>
+<td>POST to create documents</td>
+</tr>
+<tr>
+<td><code>disable_replace_one</code></td>
+<td>PUT to replace documents</td>
+</tr>
+<tr>
+<td><code>disable_update_one</code></td>
+<td>PATCH to update documents</td>
+</tr>
+<tr>
+<td><code>disable_delete_one</code></td>
+<td>DELETE documents</td>
+</tr>
+</tbody>
+</table>
+<h3 id="adding-route-specific-dependencies">Adding Route-Specific Dependencies<a class="headerlink" href="#adding-route-specific-dependencies" title="Permanent link">&para;</a></h3>
+<p>Add authentication or authorization to individual routes using these parameters:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Protects</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dependencies_get_all</code></td>
+<td>GET all documents</td>
+</tr>
+<tr>
+<td><code>dependencies_get_one</code></td>
+<td>GET single documents</td>
+</tr>
+<tr>
+<td><code>dependencies_create_one</code></td>
+<td>POST (create)</td>
+</tr>
+<tr>
+<td><code>dependencies_replace_one</code></td>
+<td>PUT (replace)</td>
+</tr>
+<tr>
+<td><code>dependencies_update_one</code></td>
+<td>PATCH (update)</td>
+</tr>
+<tr>
+<td><code>dependencies_delete_one</code></td>
+<td>DELETE</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-read-only-collection">Example: Read-Only Collection<a class="headerlink" href="#example-read-only-collection" title="Permanent link">&para;</a></h3>
+<p>Create a collection where only reading is allowed:</p>
+<div class="highlight"><pre><span></span><code><span class="n">router</span> <span class="o">=</span> <span class="n">CRUDRouter</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">ProductModel</span><span class="p">,</span>
+    <span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">,</span>
+    <span class="n">collection_name</span><span class="o">=</span><span class="s2">&quot;products&quot;</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/products&quot;</span><span class="p">,</span>
+    <span class="n">disable_create_one</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>      <span class="c1"># No POST</span>
+    <span class="n">disable_replace_one</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>     <span class="c1"># No PUT</span>
+    <span class="n">disable_update_one</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>      <span class="c1"># No PATCH</span>
+    <span class="n">disable_delete_one</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>      <span class="c1"># No DELETE</span>
+    <span class="c1"># Only GET endpoints remain</span>
+<span class="p">)</span>
+</code></pre></div>
+<h3 id="example-protect-delete-operations">Example: Protect Delete Operations<a class="headerlink" href="#example-protect-delete-operations" title="Permanent link">&para;</a></h3>
+<p>Require admin authentication only for deletion:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">Depends</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">require_admin</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">User</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_user</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="o">.</span><span class="n">is_admin</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">403</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&quot;Admin required&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">user</span>
+
+<span class="n">router</span> <span class="o">=</span> <span class="n">CRUDRouter</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">UserModel</span><span class="p">,</span>
+    <span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">,</span>
+    <span class="n">collection_name</span><span class="o">=</span><span class="s2">&quot;users&quot;</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/users&quot;</span><span class="p">,</span>
+    <span class="n">dependencies_delete_one</span><span class="o">=</span><span class="p">[</span><span class="n">Depends</span><span class="p">(</span><span class="n">require_admin</span><span class="p">)],</span>  <span class="c1"># Only DELETE needs admin</span>
+<span class="p">)</span>
+</code></pre></div>
+<h3 id="example-protect-read-operations">Example: Protect Read Operations<a class="headerlink" href="#example-protect-read-operations" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">router</span> <span class="o">=</span> <span class="n">CRUDRouter</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">UserModel</span><span class="p">,</span>
+    <span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">,</span>
+    <span class="n">collection_name</span><span class="o">=</span><span class="s2">&quot;users&quot;</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/users&quot;</span><span class="p">,</span>
+    <span class="n">dependencies_get_all</span><span class="o">=</span><span class="p">[</span><span class="n">Depends</span><span class="p">(</span><span class="n">require_auth</span><span class="p">)],</span>
+    <span class="n">dependencies_get_one</span><span class="o">=</span><span class="p">[</span><span class="n">Depends</span><span class="p">(</span><span class="n">require_auth</span><span class="p">)],</span>
+<span class="p">)</span>
+</code></pre></div>
+<h2 id="custom-identifier-fields">Custom Identifier Fields<a class="headerlink" href="#custom-identifier-fields" title="Permanent link">&para;</a></h2>
+<p>By default, CRUDRouter uses MongoDB's <code>_id</code> field to uniquely identify documents. However, you can use any unique field as the identifier in your routes.</p>
+<h3 id="default-behavior-using-_id">Default Behavior (Using <code>_id</code>)<a class="headerlink" href="#default-behavior-using-_id" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">router</span> <span class="o">=</span> <span class="n">CRUDRouter</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">UserModel</span><span class="p">,</span>
+    <span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">,</span>
+    <span class="n">collection_name</span><span class="o">=</span><span class="s2">&quot;users&quot;</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/users&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="c1"># Routes: /users/{id}</span>
+</code></pre></div>
+<h3 id="custom-identifier-using-email">Custom Identifier (Using Email)<a class="headerlink" href="#custom-identifier-using-email" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">router</span> <span class="o">=</span> <span class="n">CRUDRouter</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">UserModel</span><span class="p">,</span>
+    <span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">,</span>
+    <span class="n">collection_name</span><span class="o">=</span><span class="s2">&quot;users&quot;</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/users&quot;</span><span class="p">,</span>
+    <span class="n">identifier_field</span><span class="o">=</span><span class="s2">&quot;email&quot;</span><span class="p">,</span>  <span class="c1"># Use email instead of _id</span>
+<span class="p">)</span>
+<span class="c1"># Routes: /users/{email}  where {email} is the user&#39;s email address</span>
+</code></pre></div>
+<p>Now API calls become more intuitive:
+- <code>GET /users/john@example.com</code> instead of <code>GET /users/507f1f77bcf86cd799439011</code></p>
+<div class="admonition tip">
+<p class="admonition-title">Custom Identifiers in API Documentation</p>
+<p>The <code>identifier_field</code> parameter also updates your OpenAPI documentation to reflect the actual field name, making your API documentation more accurate and useful.</p>
+</div>
+<p>When <code>identifier_field</code> is left as <code>_id</code>, the generated route path still uses <code>{id}</code> in the URL and OpenAPI docs for readability. When you set a custom identifier such as <code>email</code>, the route path becomes <code>{email}</code>.</p>
+<h2 id="auto-populate-references">Auto-Populate References<a class="headerlink" href="#auto-populate-references" title="Permanent link">&para;</a></h2>
+<p>When working with related data, you often store IDs of related documents rather than embedding entire objects. The <code>populates</code> parameter automatically fetches and includes full related documents in your responses.</p>
+<h3 id="whats-populating">What's Populating?<a class="headerlink" href="#whats-populating" title="Permanent link">&para;</a></h3>
+<p>Instead of returning just IDs:
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;My Song&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;artist_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;456&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;789&quot;</span><span class="p">]</span><span class="w">  </span><span class="c1">// Just IDs</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p>Populating returns full documents:
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;My Song&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;artist_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;456&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;genre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rock&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;789&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Jane Smith&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;genre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Jazz&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h3 id="setup-example">Setup Example<a class="headerlink" href="#setup-example" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi_crudrouter_mongodb</span><span class="w"> </span><span class="kn">import</span> <span class="n">CRUDRouter</span><span class="p">,</span> <span class="n">CRUDPopulate</span>
+
+<span class="n">router</span> <span class="o">=</span> <span class="n">CRUDRouter</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">Track</span><span class="p">,</span>
+    <span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">,</span>
+    <span class="n">collection_name</span><span class="o">=</span><span class="s2">&quot;tracks&quot;</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/tracks&quot;</span><span class="p">,</span>
+    <span class="n">populates</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">CRUDPopulate</span><span class="p">(</span>
+            <span class="n">field</span><span class="o">=</span><span class="s2">&quot;artist_ids&quot;</span><span class="p">,</span>           <span class="c1"># Field containing IDs in this collection</span>
+            <span class="n">collection</span><span class="o">=</span><span class="s2">&quot;artists&quot;</span><span class="p">,</span>         <span class="c1"># Collection to fetch documents from</span>
+            <span class="n">model</span><span class="o">=</span><span class="n">Artist</span><span class="p">,</span>                 <span class="c1"># Model for the fetched documents</span>
+        <span class="p">),</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Now when clients call:
+- <code>GET /tracks</code> - Artist data is auto-populated
+- <code>GET /tracks/{id}</code> - Artist data is auto-populated</p>
+<p>If you configure <code>populates</code> without setting <code>model_out</code>, the router intentionally skips a strict FastAPI response model for the populated <code>GET</code> responses. This avoids response-model mismatches when populated fields contain full nested documents instead of raw ids.</p>
+<p>For more details on populating behavior and edge cases, see the <a href="../CRUDPopulate/">CRUDPopulate</a> documentation.</p>
+<h2 id="automatic-api-documentation">Automatic API Documentation<a class="headerlink" href="#automatic-api-documentation" title="Permanent link">&para;</a></h2>
+<p>The CRUDRouter automatically generates comprehensive OpenAPI (Swagger) documentation for all generated routes. You'll get interactive API documentation that shows:</p>
+<ul>
+<li>All available endpoints</li>
+<li>Request and response schemas</li>
+<li>Query parameters with descriptions</li>
+<li>Error responses</li>
+<li>Try-it-out interface to test endpoints directly</li>
+</ul>
+<p><img alt="CRUDRouter OpenAPI schema" src="../../../assets/img/crud-router.png" /></p>
+<p>Access your interactive API docs at: <code>http://your-app/docs</code></p>
+<p>This means your API documentation is always in sync with your code—no manual updates needed!</p>
+<h2 id="next-steps-advanced-features">Next Steps: Advanced Features<a class="headerlink" href="#next-steps-advanced-features" title="Permanent link">&para;</a></h2>
+<p>The CRUDRouter covers basic CRUD operations, but the library offers more powerful features for complex data relationships:</p>
+<h3 id="crudlookup"><a href="../CRUDLookup/">CRUDLookup</a><a class="headerlink" href="#crudlookup" title="Permanent link">&para;</a></h3>
+<p>Use nested child routes backed by a related collection. This is the feature behind routes such as <code>/users/{id}/messages</code>.</p>
+<h3 id="crudembed"><a href="../CRUDEmbed/">CRUDEmbed</a><a class="headerlink" href="#crudembed" title="Permanent link">&para;</a></h3>
+<p>Work with embedded documents stored directly inside the parent model.</p>
+<h3 id="crudpopulate"><a href="../CRUDPopulate/">CRUDPopulate</a><a class="headerlink" href="#crudpopulate" title="Permanent link">&para;</a></h3>
+<p>Learn more about automatically fetching related documents. Includes details on handling edge cases and optimizing performance with reference resolution.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/pierrod/fastapi-crudrouter-mongodb" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M202.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M496 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/pierre-duveau-193586182" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/pierrod" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M351.9 280H161c2.9 64.5 17.2 123.9 37.5 167.4 11.4 24.5 23.7 41.8 35.1 52.4 11.2 10.5 18.9 12.2 22.9 12.2s11.7-1.7 22.9-12.2c11.4-10.6 23.7-28 35.1-52.4 20.3-43.5 34.6-102.9 37.5-167.4zm-191-48h190.9c-2.8-64.5-17.1-123.9-37.4-167.4-11.4-24.4-23.7-41.8-35.1-52.4C268.1 1.7 260.4 0 256.4 0s-11.7 1.7-22.9 12.2c-11.4 10.6-23.7 28-35.1 52.4-20.3 43.5-34.6 102.9-37.5 167.4m-48 0c3.5-85.6 25.6-165.1 57.9-217.3C78.7 47.3 10.9 131.2 1.5 232zM1.5 280c9.4 100.8 77.2 184.7 169.3 217.3-32.3-52.2-54.4-131.7-57.9-217.3zm398.4 0c-3.5 85.6-25.6 165.1-57.9 217.3 92.1-32.7 159.9-116.5 169.3-217.3zm111.4-48C501.9 131.2 434.1 47.3 342 14.7c32.3 52.2 54.4 131.7 57.9 217.3z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["search.suggest", "search.highlight", "content.tabs.link", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../js/termynal.js"></script>
+      
+        <script src="../../../js/custom.js"></script>
+      
+    
+  </body>
+</html>
